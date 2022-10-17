@@ -37,18 +37,35 @@ public:
   }
   TDynamicVector(const TDynamicVector& v)
   {
+      sz = v.sz;
+      pMem = new T[sz];
+      std::copy(v.pMem,v.pMem + sz,pMem);
   }
   TDynamicVector(TDynamicVector&& v) noexcept
   {
+      pMem = nullptr;
+      swap(*this, v);
   }
   ~TDynamicVector()
   {
   }
   TDynamicVector& operator=(const TDynamicVector& v)
   {
+      if (this == &v)
+          return *this;
+      if (sz != v.sz) {
+          T* p = new T[v.sz];
+          delete[] pMem;
+          sz = v.sz;
+          pMem = p;
+      }
+      std::copy(v.pMem, v.pMem + sz, pMem);
+      return *this;
   }
   TDynamicVector& operator=(TDynamicVector&& v) noexcept
   {
+      swap(*this, v);
+      return *this;
   }
 
   size_t size() const noexcept { return sz; }
@@ -79,6 +96,11 @@ public:
   // скалярные операции
   TDynamicVector operator+(T val)
   {
+      TDynamicVector tmp(sz);
+      for (size_t i = 0; i < sz; i++) 
+          tmp.pMem[i] = pMem[i] + val;
+          return tmp;
+      
   }
   TDynamicVector operator-(double val)
   {
@@ -90,6 +112,11 @@ public:
   // векторные операции
   TDynamicVector operator+(const TDynamicVector& v)
   {
+      TDynamicVector tmp(sz);
+      for (size_t i = 0; i < sz; i++) 
+          tmp.pMem[i] = pMem[i] + v.pMem[i];
+          return tmp;
+      
   }
   TDynamicVector operator-(const TDynamicVector& v)
   {
@@ -144,22 +171,44 @@ public:
   // матрично-скалярные операции
   TDynamicVector<T> operator*(const T& val)
   {
+      TDynamicMatrix tmp(sz);
+      for (size_t i = 0; i < sz; i++) {
+          tmp.pMem[i] = pMem[i] * val;
+          return tmp;
+      }
   }
 
   // матрично-векторные операции
   TDynamicVector<T> operator*(const TDynamicVector<T>& v)
   {
+      TDynamicVector<T> tmp(sz);
+      for (size_t i = 0; i < sz; i++) 
+          tmp.pMem[i] = pMem[i] *v;
+          return tmp;
+      
   }
 
   // матрично-матричные операции
   TDynamicMatrix operator+(const TDynamicMatrix& m)
   {
+      TDynamicMatrix tmp(sz);
+      for (size_t i = 0; i < sz; i++) 
+          tmp.pMem[i] = pMem[i] + m.pMem[i];
+          return tmp;
+      
   }
   TDynamicMatrix operator-(const TDynamicMatrix& m)
   {
   }
   TDynamicMatrix operator*(const TDynamicMatrix& m)
   {
+      TDynamicMatrix tmp(sz);
+      for (size_t i = 0; i < sz; i++) 
+          for (size_t j = 0; j < sz; j++)
+              for (size_t k = 0; k < sz; k++)
+          tmp.pMem[i][j] += pMem[i][k] *m.pMem[k][j];
+          return tmp;
+      
   }
 
   // ввод/вывод
