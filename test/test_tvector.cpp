@@ -4,6 +4,8 @@
 
 TEST(TDynamicVector, can_create_vector_with_positive_length)
 {
+	TDynamicVector<int> v(5);
+
   ASSERT_NO_THROW(TDynamicVector<int> v(5));
 }
 
