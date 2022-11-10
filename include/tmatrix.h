@@ -25,7 +25,9 @@ protected:
 public:
   TDynamicVector(size_t size = 1) : sz(size)
   {
+ 
     if ((sz == 0))
+
       throw out_of_range("Vector size should be greater than zero");
     if (sz > MAX_VECTOR_SIZE)
         throw - 1;
@@ -79,15 +81,19 @@ public:
   // индексация
   T& operator[](size_t ind)
   {
+
       if (ind < 0 || ind >= sz)
           throw - 1;
+
       
       return pMem[ind];
   }
   const T& operator[](size_t ind) const
   {
+ 
       if (ind < 0 || ind >= sz)
           throw - 1;
+
       
       return pMem[ind];
 
@@ -167,6 +173,7 @@ public:
       return tmp;
   }
   T operator*(const TDynamicVector& v) noexcept(noexcept(T()))
+ 
   { 
       T tmp = 0;
       if (sz != v.sz) {
@@ -178,6 +185,7 @@ public:
           tmp += pMem[i] * v.pMem[i];
       }
        return tmp;
+
   }
 
   friend void swap(TDynamicVector& lhs, TDynamicVector& rhs) noexcept
@@ -213,8 +221,10 @@ class TDynamicMatrix : private TDynamicVector<TDynamicVector<T>>
 public:
   TDynamicMatrix(size_t s = 1) : TDynamicVector<TDynamicVector<T>>(s)
   {
+ 
       if ((sz == 0) || (sz > MAX_MATRIX_SIZE)||(sz<0))
           throw -1;
+
 
     for (size_t i = 0; i < sz; i++)
       pMem[i] = TDynamicVector<T>(sz);
@@ -222,9 +232,11 @@ public:
   TDynamicMatrix(const TDynamicVector<TDynamicVector<T>>& V) : TDynamicVector<TDynamicVector<T>>(V) {}
 
   using TDynamicVector<TDynamicVector<T>>::operator[];
+ 
  using TDynamicVector<TDynamicVector<T>>::size;
   using TDynamicVector<TDynamicVector<T>>::at;
   
+
 
   // сравнение
   bool operator==(const TDynamicMatrix& m) const noexcept
@@ -266,8 +278,9 @@ public:
 
   // матрично-матричные операции
   TDynamicMatrix operator+(const TDynamicMatrix& m)
-  {
+  { 
       /*if (m.size() != sz)
+
           throw out_of_range("error");
       TDynamicMatrix tmp(sz);
       for (size_t i = 0; i < sz; i++) 
@@ -278,8 +291,10 @@ public:
   }
   TDynamicMatrix operator-(const TDynamicMatrix& m)
   {
+ 
       return TDynamicVector<TDynamicVector<T>>::operator-(m);
       /*if (m.size() != sz)
+
           throw out_of_range("error");
       TDynamicMatrix tmp(sz);
       for (size_t i = 0; i < sz; i++)

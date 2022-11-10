@@ -42,7 +42,9 @@ TEST(TDynamicMatrix, can_get_size)
 {
 	TDynamicMatrix<int> v(4);
 
+
 	EXPECT_EQ(4, v[0].size());
+
 
 }
 
@@ -56,16 +58,20 @@ TEST(TDynamicMatrix, can_set_and_get_element)
 
 TEST(TDynamicMatrix, throws_when_set_element_with_negative_index)
 {
+
 	//TDynamicMatrix<int> m(5);
 	//ASSERT_ANY_THROW(m[-1][0] = 5);
+
 	TDynamicMatrix<int> m(10);
 	ASSERT_ANY_THROW(m.at(-3));
 }
 
 TEST(TDynamicMatrix, throws_when_set_element_with_too_large_index)
 {
+
 	//TDynamicMatrix<int> m(5);
 	//ASSERT_ANY_THROW(m[8][0] = 5);
+
 	TDynamicMatrix<int> m(10);
 	ASSERT_ANY_THROW(m.at(11));
 }
@@ -98,7 +104,7 @@ TEST(TDynamicMatrix, assign_operator_change_matrix_size)
 	TDynamicMatrix<int> m1(size1), m2(size2);
 	m2 = m1;
 	EXPECT_EQ(size1, m2.size());
-	
+
 }
 
 TEST(TDynamicMatrix, can_assign_matrices_of_different_size)
@@ -116,11 +122,13 @@ TEST(TDynamicMatrix, can_assign_matrices_of_different_size)
 
 TEST(TDynamicMatrix, compare_equal_matrices_return_true)
 {
+
 	TDynamicMatrix<int> m(5), m1;
 	m1 = m;
 	EXPECT_EQ(true, m1 == m);
 
 	/*const size_t size = 2;
+
 	TDynamicMatrix<int> m1(size), m2(size);
 	for (size_t i = 0; i < size; i++)
 		for (size_t j = 0; j < size; j++)
@@ -128,7 +136,9 @@ TEST(TDynamicMatrix, compare_equal_matrices_return_true)
 			m1[i][j] = i + j;
 			m2[i][j] = i + j;
 		}
+
 	EXPECT_EQ(true, m1 == m2);*/
+
 }
 
 TEST(TDynamicMatrix, compare_matrix_with_itself_return_true)

@@ -137,7 +137,9 @@ TEST(TDynamicVector, vectors_with_different_size_are_not_equal)
 
 TEST(TDynamicVector, can_add_scalar_to_vector)
 {
+
 	/*const size_t size = 5;
+
 	const int scalar = 2;
 	TDynamicVector<int> v1(size), v2(size);
 	for (size_t i = 0; i < size; i++)
@@ -146,16 +148,20 @@ TEST(TDynamicVector, can_add_scalar_to_vector)
 		v2[i] = i + scalar;
 	}
 	v1 = v1 + scalar;
+
 	EXPECT_EQ(true, v1 == v2);*/
 	TDynamicVector<int> v(4);
 	v[0] = 5;
 	v = v + 5;
 	EXPECT_EQ(10, v[0]);
+
 }
 
 TEST(TDynamicVector, can_subtract_scalar_from_vector)
 {
+
   /*const size_t size = 5;
+
   const int scalar = 2;
   TDynamicVector<int> v1(size), v2(size);
   for (size_t i = 0; i < size; i++)
@@ -164,16 +170,20 @@ TEST(TDynamicVector, can_subtract_scalar_from_vector)
 	  v2[i] = i - scalar;
   }
   v1 = v1 - scalar;
+
   EXPECT_EQ(true, v1 == v2);*/
 	TDynamicVector<int> v(4);
 	v[0] = 5;
 	v = v - 5;
 	EXPECT_EQ(0, v[0]);
+
 }
 
 TEST(TDynamicVector, can_multiply_scalar_by_vector)
 {
+
 	/*const size_t size = 5;
+
 	const int scalar = 2;
 	TDynamicVector<int> v1(size), v2(size);
 	for (size_t i = 0; i < size; i++)
@@ -182,11 +192,13 @@ TEST(TDynamicVector, can_multiply_scalar_by_vector)
 		v2[i] = i * scalar;
 	}
 	v1 = v1 * scalar;
+
 	EXPECT_EQ(true, v1 == v2);*/
 	TDynamicVector<int> v(4);
 	v[0] = 5;
 	v = v * 5;
 	EXPECT_EQ(25, v[0]);
+
 }
 
 TEST(TDynamicVector, can_add_vectors_with_equal_size)
@@ -245,8 +257,10 @@ TEST(TDynamicVector, can_multiply_vectors_with_equal_size)
 
 TEST(TDynamicVector, cant_multiply_vectors_with_not_equal_size)
 {
+
 	//const size_t size1 = 5, size2 = 10;
 	TDynamicVector<int> v1(5), v2(27);
+
 	ASSERT_ANY_THROW(v1 * v2);
 }
 
